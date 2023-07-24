@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Container } from './MainPage.styled';
 
 const MainPage = () => {
   const [address, setAddress] = useState('');
@@ -19,19 +20,21 @@ const MainPage = () => {
     console.log('Input 2 value:', amount);
   };
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        wallet address
-        <input type="text" name="address" value={address} onChange={handleInputChange} />
-      </label>
-      <br />
-      <label>
-        amount
-        <input type="text" name="amount" value={amount} onChange={handleInputChange} />
-      </label>
-      <br />
-      <button type="submit">Submit</button>
-    </form>
+    <Container>
+      <form onSubmit={handleSubmit}>
+        <label>
+          wallet address
+          <input type="text" name="address" value={address} onChange={handleInputChange} />
+        </label>
+        <br />
+        <label>
+          amount
+          <input type="text" name="amount" value={amount} onChange={handleInputChange} />
+        </label>
+        <br />
+        <button type="submit">Submit</button>
+      </form>
+    </Container>
   );
 };
 
