@@ -14,6 +14,8 @@ export const MetaMaskContextProvider = ({ children }) => {
 
   const _updateWallet = useCallback(async providedAccounts => {
     const accounts = providedAccounts || (await window.ethereum.request({ method: 'eth_accounts' }));
+    console.log('🚀 ~ accounts:', accounts);
+    console.log('🚀 ~ providedAccounts:', providedAccounts);
 
     if (accounts.length === 0) {
       setWallet(disconnectedState);
