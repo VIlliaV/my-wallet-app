@@ -14,8 +14,6 @@ export const MetaMaskContextProvider = ({ children }) => {
 
   const _updateWallet = useCallback(async providedAccounts => {
     const accounts = providedAccounts || (await window.ethereum.request({ method: 'eth_accounts' }));
-    console.log('🚀 ~ accounts:', accounts);
-    console.log('🚀 ~ providedAccounts:', providedAccounts);
 
     if (accounts.length === 0) {
       setWallet(disconnectedState);
@@ -40,13 +38,18 @@ export const MetaMaskContextProvider = ({ children }) => {
 
   useEffect(() => {
     const getProvider = async () => {
-      const provider = await detectEthereumProvider({ silent: true });
+      const provider = await detectEthereumProvider();
       setHasProvider(Boolean(provider));
 
       if (provider) {
         updateWalletAndAccounts();
         window.ethereum.on('accountsChanged', updateWallet);
         window.ethereum.on('chainChanged', updateWalletAndAccounts);
+        clearInterval();
+      } else {
+        setInterval(() => {
+          window.location.reload();
+        }, 5000);
       }
     };
 
@@ -55,6 +58,7 @@ export const MetaMaskContextProvider = ({ children }) => {
     return () => {
       window.ethereum?.removeListener('accountsChanged', updateWallet);
       window.ethereum?.removeListener('chainChanged', updateWalletAndAccounts);
+      clearInterval();
     };
   }, [updateWallet, updateWalletAndAccounts]);
 

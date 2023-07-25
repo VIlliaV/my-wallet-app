@@ -1,3 +1,5 @@
+import { Container } from './Logo.styled';
+
 export const Logo = () => {
-  return <div>Logo</div>;
+  return <Container>dexola</Container>;
 };

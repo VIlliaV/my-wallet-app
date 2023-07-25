@@ -1,6 +1,6 @@
 body {
   margin: 0 auto;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Roboto Mono', monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -43,6 +43,6 @@ textarea {
   resize: none;
 }
 
-test {
-  color: rgb(102, 161, 130);
+pre {
+  margin: 0px 0px;
 }
