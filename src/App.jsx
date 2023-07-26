@@ -1,4 +1,5 @@
 import { Container } from './App.styled';
+import { Toaster } from 'react-hot-toast';
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import { MetaMaskContextProvider } from './components/MetaMaskContextProvider/MetaMaskContextProvider';
@@ -7,6 +8,20 @@ import MainPage from './pages/MainPage/MainPage';
 function App() {
   return (
     <MetaMaskContextProvider>
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+        gutter={8}
+        containerClassName=""
+        containerStyle={{}}
+        toastOptions={{
+          duration: 2000,
+          style: {
+            background: 'rgb(30, 31, 40)',
+            color: 'rgb(250, 250, 250)',
+          },
+        }}
+      />
       <Container>
         <figure style={{ boxSizing: 'border-box', margin: '-10px 0px', padding: '0' }}>
           <video

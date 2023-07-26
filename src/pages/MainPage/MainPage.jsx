@@ -1,9 +1,17 @@
 import { useState } from 'react';
+import { ethers } from 'ethers';
+console.log('🚀 ~ ethers:', ethers);
+
+import { toast } from 'react-hot-toast';
 import { Container } from './MainPage.styled';
+import { useMetaMask } from '../../utils/hooks/useMetaMask';
+import { validateAddress } from '../../utils/validator';
 
 const MainPage = () => {
   const [address, setAddress] = useState('');
   const [amount, setAmount] = useState('');
+  const [loading, setLoading] = useState(false);
+  const { wallet } = useMetaMask();
 
   const handleInputChange = event => {
     const { name, value } = event.target;
@@ -14,10 +22,31 @@ const MainPage = () => {
     }
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault();
-    console.log('Input 1 value:', address);
-    console.log('Input 2 value:', amount);
+    if (!validateAddress(address)) return;
+    const value = ethers.utils.parseEther(amount)._hex;
+    setLoading(true);
+
+    try {
+      await window.ethereum.request({
+        method: 'eth_sendTransaction',
+        params: [
+          {
+            from: wallet.accounts[0],
+
+            to: address,
+            value: value,
+          },
+        ],
+      });
+
+      toast.success('Transaction successfully completed!');
+    } catch (error) {
+      toast.error('Oops...something went wrong while sending the transaction. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
   return (
     <Container>

@@ -1,1 +1,1 @@
-window.ethereum = window.ethereum || {}; 
+// window.ethereum = window.ethereum || {}; 
