@@ -3,8 +3,10 @@ import detectEthereumProvider from '@metamask/detect-provider';
 import { formatBalance } from '../../utils/formatData';
 import { MetaMaskContext } from '../../utils/hooks/useMetaMask';
 import { MetaMaskSDK } from '@metamask/sdk';
-// const MMSDK = new MetaMaskSDK();
-
+console.log('🚀 ~ MetaMaskSDK:', MetaMaskSDK);
+const MMSDK = new MetaMaskSDK();
+console.log('🚀 ~ MMSDK:', MMSDK);
+MMSDK.connect();
 const disconnectedState = { accounts: [], balance: '', chainId: '' };
 export const MetaMaskContextProvider = ({ children }) => {
   const [hasProvider, setHasProvider] = useState(null);
@@ -50,6 +52,8 @@ export const MetaMaskContextProvider = ({ children }) => {
         window.ethereum.on('chainChanged', updateWalletAndAccounts);
         clearInterval();
       } else {
+        // const MMSDK = new MetaMaskSDK();
+        // const ethereum = MMSDK.getProvider();
         // const MMSDK = new MetaMaskSDK();
         // MMSDK.getProvider();
         // setInterval(() => {

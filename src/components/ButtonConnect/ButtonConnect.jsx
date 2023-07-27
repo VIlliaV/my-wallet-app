@@ -6,7 +6,7 @@ import { MetaMaskSDK } from '@metamask/sdk';
 const ButtonConnect = () => {
   const { wallet, hasProvider, isConnecting, connectMetaMask, openSDK } = useMetaMask();
 
-  let handleButton = !hasProvider ? openSDK : wallet.accounts.length < 1 ? connectMetaMask : () => {};
+  let handleButton = !hasProvider ? connectMetaMask : wallet.accounts.length < 1 ? connectMetaMask : () => {};
 
   return (
     <Button disabled={isConnecting} onClick={handleButton}>
