@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { ethers } from 'ethers';
-console.log('🚀 ~ ethers:', ethers);
 
 import { toast } from 'react-hot-toast';
 import { Container } from './MainPage.styled';
@@ -52,16 +51,22 @@ const MainPage = () => {
     <Container>
       <form onSubmit={handleSubmit}>
         <label>
-          wallet address
-          <input type="text" name="address" value={address} onChange={handleInputChange} />
+          public address (0x)
+          <input
+            type="text"
+            name="address"
+            value={address}
+            onChange={handleInputChange}
+            placeholder={wallet.accounts[0]}
+          />
         </label>
         <br />
         <label>
           amount
-          <input type="text" name="amount" value={amount} onChange={handleInputChange} />
+          <input type="text" name="amount" value={amount} onChange={handleInputChange} placeholder={wallet.balance} />
         </label>
         <br />
-        <button type="submit">Submit</button>
+        <button type="submit">Send</button>
       </form>
     </Container>
   );

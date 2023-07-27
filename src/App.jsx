@@ -23,12 +23,18 @@ function App() {
         }}
       />
       <Container>
-        <figure style={{ boxSizing: 'border-box', margin: '-10px 0px', padding: '0' }}>
+        <figure style={{ boxSizing: 'border-box', margin: '-10px 0px', padding: '0', zIndex: '-10' }}>
           <video
             autoPlay
             loop
             muted
-            style={{ position: 'absolute', width: '100%', height: '100vh', objectFit: 'cover' }}
+            style={{
+              position: 'absolute',
+              width: '100%',
+              height: '100vh',
+              objectFit: 'cover',
+              // zIndex: '-5',
+            }}
             poster="https://dexola.com/wp-content/uploads/2023/04/Dexola_BG_1-1.png"
           >
             <source

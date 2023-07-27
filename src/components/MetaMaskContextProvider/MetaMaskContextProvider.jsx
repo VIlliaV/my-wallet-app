@@ -2,6 +2,8 @@ import { useState, useEffect, useCallback } from 'react';
 import detectEthereumProvider from '@metamask/detect-provider';
 import { formatBalance } from '../../utils/formatData';
 import { MetaMaskContext } from '../../utils/hooks/useMetaMask';
+import { MetaMaskSDK } from '@metamask/sdk';
+const MMSDK = new MetaMaskSDK();
 
 const disconnectedState = { accounts: [], balance: '', chainId: '' };
 export const MetaMaskContextProvider = ({ children }) => {
@@ -14,19 +16,19 @@ export const MetaMaskContextProvider = ({ children }) => {
 
   const _updateWallet = useCallback(async providedAccounts => {
     const accounts = providedAccounts || (await window.ethereum.request({ method: 'eth_accounts' }));
-
+    const ethereum = MMSDK.getProvider();
     if (accounts.length === 0) {
       setWallet(disconnectedState);
       return;
     }
 
     const balance = formatBalance(
-      await window.ethereum.request({
+      await ethereum.request({
         method: 'eth_getBalance',
         params: [accounts[0], 'latest'],
       })
     );
-    const chainId = await window.ethereum.request({
+    const chainId = await ethereum.request({
       method: 'eth_chainId',
     });
 

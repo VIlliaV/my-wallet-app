@@ -1,5 +1,9 @@
+import { ethers } from 'ethers';
+console.log('🚀 ~ ethers:', ethers);
+
 export function formatBalance(rawBalance) {
-  const balance = (parseInt(rawBalance) / 1000000000000000000).toFixed(3);
+  const balance = parseFloat(ethers.utils.formatUnits(rawBalance, 18)).toFixed(3);
+
   return balance;
 }
 
@@ -8,6 +12,6 @@ export function formatChainAsNum(chainIdHex) {
   return chainIdNum;
 }
 
-export function formatAddress(addr) {
-  return `${addr.substring(0, 5)}...${addr.substring(addr.length - 4)}`;
+export function formatAddress(address) {
+  return `${address.substring(0, 5)}...${address.substring(address.length - 4)}`;
 }
