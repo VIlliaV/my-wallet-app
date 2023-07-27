@@ -15,6 +15,14 @@ export const Container = styled.section`
   & form {
     display: flex;
     flex-direction: column;
+    font-size: 12px;
+    @media screen and (min-width: 768px) {
+      font-size: 18px;
+    }
+
+    @media screen and (min-width: 1200px) {
+      font-size: 24px;
+    }
 
     & label {
       display: flex;
@@ -23,6 +31,14 @@ export const Container = styled.section`
       gap: 5px;
 
       & input {
+        max-width: 200px;
+        @media screen and (min-width: 768px) {
+          max-width: 400px;
+        }
+
+        @media screen and (min-width: 1200px) {
+          max-width: 500px;
+        }
         padding: 1px 10px;
         background-color: transparent;
       }
@@ -38,6 +54,10 @@ export const Container = styled.section`
       font-weight: 400;
 
       cursor: pointer;
+      &:disabled {
+        opacity: 0.1;
+        cursor: not-allowed;
+      }
       &:hover {
         background-color: rgb(221, 218, 218, 0.6);
       }

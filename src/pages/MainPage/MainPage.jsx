@@ -5,12 +5,15 @@ import { toast } from 'react-hot-toast';
 import { Container } from './MainPage.styled';
 import { useMetaMask } from '../../utils/hooks/useMetaMask';
 import { validateAddress } from '../../utils/validator';
+import Loader from '../../components/Loader/Loader';
 
 const MainPage = () => {
   const [address, setAddress] = useState('');
   const [amount, setAmount] = useState('');
   const [loading, setLoading] = useState(false);
-  const { wallet } = useMetaMask();
+  const { wallet, hasProvider } = useMetaMask();
+  console.log('🚀 ~ wallet:', wallet);
+  console.log('🚀 ~ hasProvider:', hasProvider);
 
   const handleInputChange = event => {
     const { name, value } = event.target;
@@ -33,7 +36,6 @@ const MainPage = () => {
         params: [
           {
             from: wallet.accounts[0],
-
             to: address,
             value: value,
           },
@@ -66,7 +68,13 @@ const MainPage = () => {
           <input type="text" name="amount" value={amount} onChange={handleInputChange} placeholder={wallet.balance} />
         </label>
         <br />
-        <button type="submit">Send</button>
+        {loading ? (
+          <Loader></Loader>
+        ) : (
+          <button type="submit" disabled={loading || wallet.accounts.length < 1}>
+            Send
+          </button>
+        )}
       </form>
     </Container>
   );

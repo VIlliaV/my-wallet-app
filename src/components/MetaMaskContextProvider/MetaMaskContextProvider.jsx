@@ -4,9 +4,6 @@ import { formatBalance } from '../../utils/formatData';
 import { MetaMaskContext } from '../../utils/hooks/useMetaMask';
 import { MetaMaskSDK } from '@metamask/sdk';
 
-// const MMSDK = new MetaMaskSDK();
-
-// MMSDK.connect();
 const disconnectedState = { accounts: [], balance: '', chainId: '' };
 export const MetaMaskContextProvider = ({ children }) => {
   const [hasProvider, setHasProvider] = useState(null);
@@ -50,15 +47,6 @@ export const MetaMaskContextProvider = ({ children }) => {
         updateWalletAndAccounts();
         window.ethereum.on('accountsChanged', updateWallet);
         window.ethereum.on('chainChanged', updateWalletAndAccounts);
-        clearInterval();
-      } else {
-        // const MMSDK = new MetaMaskSDK();
-        // const ethereum = MMSDK.getProvider();
-        // const MMSDK = new MetaMaskSDK();
-        // MMSDK.getProvider();
-        // setInterval(() => {
-        //   window.location.reload();
-        // }, 5000);
       }
     };
 
@@ -67,7 +55,6 @@ export const MetaMaskContextProvider = ({ children }) => {
     return () => {
       window.ethereum?.removeListener('accountsChanged', updateWallet);
       window.ethereum?.removeListener('chainChanged', updateWalletAndAccounts);
-      clearInterval();
     };
   }, [updateWallet, updateWalletAndAccounts]);
 
