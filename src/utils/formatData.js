@@ -1,5 +1,4 @@
 import { ethers } from 'ethers';
-console.log('🚀 ~ ethers:', ethers);
 
 export function formatBalance(rawBalance) {
   const balance = parseFloat(ethers.utils.formatUnits(rawBalance, 18)).toFixed(3);
