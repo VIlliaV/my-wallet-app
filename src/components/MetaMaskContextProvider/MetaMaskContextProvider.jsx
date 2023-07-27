@@ -3,7 +3,7 @@ import detectEthereumProvider from '@metamask/detect-provider';
 import { formatBalance } from '../../utils/formatData';
 import { MetaMaskContext } from '../../utils/hooks/useMetaMask';
 import { MetaMaskSDK } from '@metamask/sdk';
-const MMSDK = new MetaMaskSDK();
+// const MMSDK = new MetaMaskSDK();
 
 const disconnectedState = { accounts: [], balance: '', chainId: '' };
 export const MetaMaskContextProvider = ({ children }) => {
@@ -16,19 +16,19 @@ export const MetaMaskContextProvider = ({ children }) => {
 
   const _updateWallet = useCallback(async providedAccounts => {
     const accounts = providedAccounts || (await window.ethereum.request({ method: 'eth_accounts' }));
-    const ethereum = MMSDK.getProvider();
+
     if (accounts.length === 0) {
       setWallet(disconnectedState);
       return;
     }
 
     const balance = formatBalance(
-      await ethereum.request({
+      await window.ethereum.request({
         method: 'eth_getBalance',
         params: [accounts[0], 'latest'],
       })
     );
-    const chainId = await ethereum.request({
+    const chainId = await window.ethereum.request({
       method: 'eth_chainId',
     });
 
@@ -41,6 +41,7 @@ export const MetaMaskContextProvider = ({ children }) => {
   useEffect(() => {
     const getProvider = async () => {
       const provider = await detectEthereumProvider();
+
       setHasProvider(Boolean(provider));
 
       if (provider) {
@@ -49,9 +50,11 @@ export const MetaMaskContextProvider = ({ children }) => {
         window.ethereum.on('chainChanged', updateWalletAndAccounts);
         clearInterval();
       } else {
-        setInterval(() => {
-          window.location.reload();
-        }, 5000);
+        // const MMSDK = new MetaMaskSDK();
+        // MMSDK.getProvider();
+        // setInterval(() => {
+        //   window.location.reload();
+        // }, 5000);
       }
     };
 
@@ -71,12 +74,23 @@ export const MetaMaskContextProvider = ({ children }) => {
       const accounts = await window.ethereum.request({
         method: 'eth_requestAccounts',
       });
+
       clearError();
       updateWallet(accounts);
     } catch (err) {
       setErrorMessage(err.message);
     }
     setIsConnecting(false);
+  };
+
+  const openSDK = async () => {
+    const options = {
+      checkInstallationImmediately: true,
+    };
+
+    const MMSDK = new MetaMaskSDK(options);
+
+    MMSDK.getProvider();
   };
 
   return (
@@ -89,6 +103,7 @@ export const MetaMaskContextProvider = ({ children }) => {
         isConnecting,
         connectMetaMask,
         clearError,
+        openSDK,
       }}
     >
       {children}
