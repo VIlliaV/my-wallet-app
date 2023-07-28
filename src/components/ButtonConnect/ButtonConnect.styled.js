@@ -13,6 +13,7 @@ const Button = styled.button`
   border-radius: 20px;
   transition: all 0.2s ease-out;
   font-size: 12px;
+  cursor: pointer;
   @media screen and (min-width: 768px) {
     font-size: 18px;
     padding: 10px;
