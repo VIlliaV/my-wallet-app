@@ -15,7 +15,7 @@ export const MetaMaskContextProvider = ({ children }) => {
 
   if (isMobile) {
     // const MMSDK = new MetaMaskSDK();
-    const ethereum = MMSDK.getProvider();
+    ethereum = MMSDK.getProvider();
     // MMSDK.connect();
   }
 
