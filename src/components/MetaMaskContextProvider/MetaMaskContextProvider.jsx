@@ -68,19 +68,19 @@ export const MetaMaskContextProvider = ({ children }) => {
 
   const connectMetaMask = async () => {
     setIsConnecting(true);
-    MMSDK.getProvider();
-    if (!isMobile) {
-      try {
-        const accounts = await window.ethereum.request({
-          method: 'eth_requestAccounts',
-        });
+    const ethereum = MMSDK.getProvider();
+    // if (!isMobile) {
+    try {
+      const accounts = await ethereum.request({
+        method: 'eth_requestAccounts',
+      });
 
-        clearError();
-        updateWallet(accounts);
-      } catch (err) {
-        setErrorMessage(err.message);
-      }
+      clearError();
+      updateWallet(accounts);
+    } catch (err) {
+      setErrorMessage(err.message);
     }
+    // }
     setIsConnecting(false);
   };
 
