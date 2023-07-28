@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { ethers } from 'ethers';
-
 import { toast } from 'react-hot-toast';
 import { Container } from './MainPage.styled';
 import { useMetaMask } from '../../utils/hooks/useMetaMask';

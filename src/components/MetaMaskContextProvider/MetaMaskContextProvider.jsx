@@ -3,7 +3,6 @@ import detectEthereumProvider from '@metamask/detect-provider';
 import { formatBalance } from '../../utils/formatData';
 import { MetaMaskContext } from '../../utils/hooks/useMetaMask';
 import { MetaMaskSDK } from '@metamask/sdk';
-import { isMobile } from 'react-device-detect';
 
 const disconnectedState = { accounts: [], balance: '', chainId: '' };
 export const MetaMaskContextProvider = ({ children }) => {
@@ -72,7 +71,7 @@ export const MetaMaskContextProvider = ({ children }) => {
     } catch (err) {
       setErrorMessage(err.message);
     }
-    // }
+
     setIsConnecting(false);
   };
 
@@ -83,7 +82,7 @@ export const MetaMaskContextProvider = ({ children }) => {
 
     const MMSDK = new MetaMaskSDK(options);
     const ethereum = MMSDK.getProvider();
-    ethereum.request({ method: 'eth_requestAccounts' });
+    await ethereum.request({ method: 'eth_requestAccounts' });
   };
 
   return (

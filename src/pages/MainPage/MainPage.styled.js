@@ -6,7 +6,7 @@ export const Container = styled.section`
   margin-top: 45px;
   padding: 5px;
   font-size: 24px;
-  color: #17191d;
+  color: var(--primary);
   font-family: 'Kanit', sans-serif;
   & ::placeholder {
     color: rgb(221, 218, 218);
@@ -47,7 +47,7 @@ export const Container = styled.section`
       font-family: 'Kanit', sans-serif;
       font-weight: 100;
       background-color: transparent;
-      color: #17191d;
+      color: var(--primary);
       border-color: rgb(118, 118, 118);
 
       font-style: normal;

@@ -15,7 +15,6 @@ const Header = () => {
   return (
     <HeaderContainer>
       <Logo />
-
       <ButtonConnect />
     </HeaderContainer>
   );

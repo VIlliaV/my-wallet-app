@@ -1,9 +1,13 @@
+:root {
+  --primary: #17191d;
+}
+
 body {
   margin: 0 auto;
   font-family: 'Roboto Mono', monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #17191d;
+  color: var(--primary);
 }
 a,
 p,
