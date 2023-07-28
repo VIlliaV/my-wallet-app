@@ -3,15 +3,20 @@ import detectEthereumProvider from '@metamask/detect-provider';
 import { formatBalance } from '../../utils/formatData';
 import { MetaMaskContext } from '../../utils/hooks/useMetaMask';
 import { MetaMaskSDK } from '@metamask/sdk';
-const MMSDK = new MetaMaskSDK();
+import { isMobile } from 'react-device-detect';
 
-MMSDK.connect();
 const disconnectedState = { accounts: [], balance: '', chainId: '' };
 export const MetaMaskContextProvider = ({ children }) => {
   const [hasProvider, setHasProvider] = useState(null);
   const [isConnecting, setIsConnecting] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [wallet, setWallet] = useState(disconnectedState);
+
+  if (isMobile) {
+    const MMSDK = new MetaMaskSDK();
+
+    MMSDK.connect();
+  }
 
   const clearError = () => setErrorMessage('');
 
