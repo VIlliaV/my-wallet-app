@@ -67,7 +67,7 @@ export const MetaMaskContextProvider = ({ children }) => {
 
   const connectMetaMask = async () => {
     setIsConnecting(true);
-
+    MMSDK.connect();
     try {
       const accounts = await window.ethereum.request({
         method: 'eth_requestAccounts',
