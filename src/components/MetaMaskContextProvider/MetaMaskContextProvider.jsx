@@ -4,6 +4,7 @@ import { formatBalance } from '../../utils/formatData';
 import { MetaMaskContext } from '../../utils/hooks/useMetaMask';
 import { MetaMaskSDK } from '@metamask/sdk';
 // import { isMobile } from 'react-device-detect';
+const MMSDK = new MetaMaskSDK();
 
 const disconnectedState = { accounts: [], balance: '', chainId: '' };
 export const MetaMaskContextProvider = ({ children }) => {
@@ -86,8 +87,7 @@ export const MetaMaskContextProvider = ({ children }) => {
       checkInstallationImmediately: true,
     };
 
-    const MMSDK = new MetaMaskSDK(options);
-
+    //  const MMSDK = new MetaMaskSDK(options);?\
     MMSDK.getProvider();
   };
 
